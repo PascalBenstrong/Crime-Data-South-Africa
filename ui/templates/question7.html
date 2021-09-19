@@ -1,0 +1,29 @@
+<section class="card mb-1 p-1 accordion-item">
+  <button
+    class="fw-bold accordion-button collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#question7_body"
+    aria-expanded="false"
+    aria-controls="question7_body"
+  >
+    7. which period did Nongoma in KwaZulu Natal have the lowest amount of
+    murder.
+  </button>
+
+  <div
+    id="question7_body"
+    class="accordion-collapse collapse"
+    data-bs-parent="main"
+  >
+    <div class="accordion-body">
+      <div class="alert alert-info mt-1" role="alert">
+        {% set period, total =
+        utils.get_period_with_lowest_murder_in_kzn(data.data) %} Nongoma in
+        KwaZulu Natal had the lowest amount of murder during the period from
+        <span class="fw-bold">{{period}}</span> the number of incidents,
+        totalling {{total}}.
+      </div>
+    </div>
+  </div>
+</section>

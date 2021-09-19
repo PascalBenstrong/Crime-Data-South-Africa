@@ -1,0 +1,20 @@
+<section class="card p-1 mb-1 accordion-item">
+  <button
+    class="card-header fw-bold accordion-button"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#table_summary"
+    aria-expanded="true"
+    aria-controls="table_summary"
+  >
+    1. Data summary
+  </button>
+
+  <div
+    id="table_summary"
+    class="table-responsive accordion-collapse collapse show"
+    data-bs-parent="main"
+  >
+    <div class="accordion-body">{% include "table.html" %}</div>
+  </div>
+</section>

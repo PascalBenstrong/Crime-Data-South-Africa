@@ -1,0 +1,26 @@
+<section class="card mb-1 p-1 accordion-item">
+  <button
+    class="fw-bold accordion-button collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#question4_body"
+    aria-expanded="false"
+    aria-controls="question4_body"
+  >
+    4. Truck hijacking incidents during the period of 2010-2011.
+  </button>
+
+  <div
+    id="question4_body"
+    class="accordion-collapse collapse"
+    data-bs-parent="main"
+  >
+    <div class="accordion-body">
+      <div class="alert alert-info mt-1" role="alert">
+        {% set total = utils.get_data_for_truck_hijacking(data.data) %} During
+        the period from 2010-2011 there were {{total}} incidents involving truck
+        hijacking.
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<!-- 
+  author: Pascal Nsunba
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>Crime data South Africa</title>
+  </head>
+  <body>
+    <div class="container h-100">
+      <main class="col-12 text-center accordion">
+        <div class="m-auto">
+          <h1 class="row justify-content-center">
+            Reported crimes in South Africa during 2005 to 2016
+          </h1>
+        </div>
+        <p>
+          This Project displays reported crime data in South Africa during the
+          period of 2005 to 2016.
+        </p>
+
+        {% include "summary.html" %} {% include "question2.html" %} {% include
+        "question3.html" %} {% include "question4.html" %} {% include
+        "question5.html" %} {% include "question6.html" %} {% include
+        "question7.html" %} {% include "question8.html" %}
+      </main>
+    </div>
+
+    <footer class="text-center">
+      <p>author: <span class="fw-bold">Pascal Nsunba</span></p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </body>
+</html>

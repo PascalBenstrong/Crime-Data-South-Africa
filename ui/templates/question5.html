@@ -1,0 +1,26 @@
+<section class="card mb-1 p-1 accordion-item">
+  <button
+    class="fw-bold accordion-button collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#question5_body"
+    aria-expanded="false"
+    aria-controls="question5_body"
+  >
+    5. Arson incidents in Ngodwana and Boitekong during the period of 2009-2010.
+  </button>
+
+  <div
+    id="question5_body"
+    class="accordion-collapse collapse"
+    data-bs-parent="main"
+  >
+    <div class="accordion-body">
+      <div class="alert alert-info mt-1" role="alert">
+        {% set total = utils.get_data_for_arson(data.data) %} During the period
+        from 2009-2010 there were {{total}} arson incidents in Ngodwana and
+        Boitekong.
+      </div>
+    </div>
+  </div>
+</section>

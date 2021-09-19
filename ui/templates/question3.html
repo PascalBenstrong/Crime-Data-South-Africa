@@ -1,0 +1,75 @@
+<section class="card p-1 mb-1 accordion-item">
+  <button
+    class="fw-bold accordion-button collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#question3_body"
+    aria-expanded="false"
+    aria-controls="question3_body"
+  >
+    3. You can request crime data from the available stations below.
+  </button>
+  <div
+    id="question3_body"
+    class="accordion-collapse collapse"
+    data-bs-parent="main"
+  >
+    <div class="accordion-body">
+      <form
+        action="/total-for-station"
+        method="GET"
+        onsubmit="get_total_data_for_station(event)"
+      >
+        <p class="card-header fw-bold">
+          The reported data will be for the full period from 2005 to 2016.
+        </p>
+        <div class="row mb-1">
+          <div class="col-sm-12 text-start">
+            <label for="province_options" class="form-label">Station</label>
+            <select
+              id="station_options"
+              name="station"
+              class="form-select form-select-sm"
+              data-live-search="true"
+            >
+              {% set stations = utils.get_unique_values_for_column("Station",
+              data.data) %} {% for s in stations %}
+              <option value="{{s}}">{{s}}</option>
+              {% endfor%}
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col d-grid">
+            <button type="submit" class="btn btn-dark col-12">Get data</button>
+          </div>
+        </div>
+      </form>
+      <div class="alert alert-info mt-1" role="alert">
+        {% set station = stations[0] %} {% set station_data =
+        utils.get_data_for_station(station, data.data) %} {% set total =
+        station_data.sum().sum() %}
+        <span id="info-station">{{station}}</span> had
+        <span id="info-station-total">{{total}}</span> crimes during a period
+        from <span>2005</span> to <span>2016</span>.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const info_station = document.getElementById("info-station");
+    const info_station_total = document.getElementById("info-station-total");
+    async function get_total_data_for_station(e) {
+      e.preventDefault();
+      let { station } = e.target.elements;
+      station = station.value;
+
+      const numberOfCrimes = await fetch(`/total-for-station/${station}`).then(
+        (res) => res.text()
+      );
+      info_station.innerText = station;
+      info_station_total.innerText = numberOfCrimes;
+    }
+  </script>
+</section>

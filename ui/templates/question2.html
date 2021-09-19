@@ -1,0 +1,118 @@
+<section class="card mb-1 p-1 accordion-item">
+  <button
+    class="fw-bold accordion-button collapsed"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#question2_body"
+    aria-expanded="false"
+    aria-controls="question2_body"
+  >
+    2. You can filter the number of crimes that occurred in your chosen province
+    below.
+  </button>
+
+  <div
+    id="question2_body"
+    class="accordion-collapse collapse"
+    data-bs-parent="main"
+  >
+    <div class="accordion-body">
+      <form
+        method="GET"
+        onsubmit="get_province_and_period(event)"
+        action="/province-and-period"
+      >
+        <p class="card-header fw-bold">
+          You may also apply period filters from 2005 to 2016. e.g. 2005-2006
+          will return number of crimes in 2005.
+        </p>
+        <div class="row mb-1">
+          <div class="col-sm-7 text-start">
+            <label for="province_options" class="form-label">Province</label>
+            <select
+              id="province_options"
+              name="province"
+              class="form-select form-select-sm"
+            >
+              {% set provinces = utils.get_unique_values_for_column("Province",
+              data.data) %} {% for p in provinces %}
+              <option value="{{p}}">{{p}}</option>
+              {% endfor%}
+            </select>
+          </div>
+
+          <div class="col-sm text-start">
+            <label for="period_start_options" class="form-label text-start"
+              >Start Period</label
+            >
+            <select
+              name="period_start"
+              id="period_start_options"
+              class="form-select form-select-sm"
+            >
+              {% set beginning_periods = utils.get_beginning_periods(data.data)
+              %} {% for p in beginning_periods %}
+              <option value="{{p}}">{{p}}</option>
+              {% endfor%}
+            </select>
+          </div>
+
+          <div class="col-sm text-start">
+            <label for="period_end_options" class="form-label text-start"
+              >End Period</label
+            >
+            <select
+              name="period_end"
+              id="period_end_options"
+              class="form-select form-select-sm"
+            >
+              {% set ending_periods = utils.get_ending_periods(data.data) %} {%
+              for p in ending_periods %}
+              <option value="{{p}}">{{p}}</option>
+              {% endfor%}
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col d-grid">
+            <button type="submit" class="btn btn-dark col-12">Get data</button>
+          </div>
+        </div>
+      </form>
+      <div class="alert alert-info mt-1" role="alert">
+        {% set beginning_period = beginning_periods[0].split("-")[0]%} {% set
+        ending_period = ending_periods[0].split("-")[-1]%} {% set period =
+        beginning_period ~ '-' ~ ending_period %} {% set period_data =
+        utils.get_data_for_period_and_province(period, provinces[0], data.data)
+        %} {% set total = period_data.sum().sum()%}
+        <span id="info-province">{{provinces[0]}}</span> had
+        <span id="info-total">{{total}}</span> crimes during a period from
+        <span id="info-period-begin">{{beginning_period}}</span> to
+        <span id="info-period-end">{{ending_period}}</span>.
+      </div>
+    </div>
+  </div>
+  <script>
+    const info_province = document.getElementById("info-province");
+    const info_total = document.getElementById("info-total");
+    const info_period_begin = document.getElementById("info-period-begin");
+    const info_period_end = document.getElementById("info-period-end");
+
+    async function get_province_and_period(e) {
+      e.preventDefault();
+      let { province, period_start, period_end } = e.target.elements;
+      province = province.value;
+      period_start = period_start.value;
+      period_end = period_end.value;
+      const numberOfCrimes = await fetch(
+        `/province-and-period?province=${province}&period_start=${period_start}&period_end=${period_end}`
+      ).then((res) => res.text());
+
+      info_province.innerText = province;
+      info_total.innerText = numberOfCrimes;
+      info_period_begin.innerText = period_start;
+      info_period_end.innerText = period_end;
+    }
+  </script>
+</section>

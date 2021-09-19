@@ -1,0 +1,18 @@
+<table class="table table-sm table-striped">
+  <thead>
+    <tr>
+      {% for header in data.summary %}
+      <th>{{ header }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in range(data.summary.shape[0]) %}
+    <tr>
+      {% for d in data.summary.iloc[i] %}
+      <td>{{ d }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
