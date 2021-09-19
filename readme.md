@@ -4,9 +4,9 @@
 
 <table>
   <tr>
-    <td><img src="https://github.com/PascalBenstrong/Crime-Data-South-Africa/blob/main/screenshots/screenshot1.png" height="400"></td>
-    <td><img src="https://github.com/PascalBenstrong/Crime-Data-South-Africa/blob/main/screenshots/screenshot2.png" height="400"></td>
-    <td><img src="https://github.com/PascalBenstrong/Crime-Data-South-Africa/blob/main/screenshots/screenshot3.png" height="400"></td>
+    <td><img src="https://github.com/PascalBenstrong/Crime-Data-South-Africa/blob/main/screenshots/screenshot1.png" height="300"></td>
+    <td><img src="https://github.com/PascalBenstrong/Crime-Data-South-Africa/blob/main/screenshots/screenshot2.png" height="300"></td>
+    <td><img src="https://github.com/PascalBenstrong/Crime-Data-South-Africa/blob/main/screenshots/screenshot3.png" height="300"></td>
   </tr>
 </table>
 
